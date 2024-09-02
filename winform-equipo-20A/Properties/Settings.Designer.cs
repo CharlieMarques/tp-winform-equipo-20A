@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TPWinForm_equipo_20A.Properties
+namespace winform_equipo_20A.Properties
 {
 
 

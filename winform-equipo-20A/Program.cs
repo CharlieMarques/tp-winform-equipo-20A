@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TPWinForm_equipo_20A
+namespace winform_equipo_20A
 {
     internal static class Program
     {
         /// <summary>
-        /// Punto de entrada principal para la aplicación.
+        /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
