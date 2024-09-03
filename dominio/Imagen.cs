@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Articulo
+    internal class Imagen
     {
-        //TODO: Propiedades y metodos
     }
 }

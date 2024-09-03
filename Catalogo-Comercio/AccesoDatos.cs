@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dominio
+namespace Catalogo_Comercio
 {
-    public class Articulo
+    public class AccesoDatos
     {
-        //TODO: Propiedades y metodos
+
     }
 }
