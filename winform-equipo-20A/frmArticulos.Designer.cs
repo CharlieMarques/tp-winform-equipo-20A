@@ -1,6 +1,6 @@
 ﻿namespace winform_equipo_20A
 {
-    partial class Form1
+    partial class frmArticulos
     {
         /// <summary>
         /// Required designer variable.
