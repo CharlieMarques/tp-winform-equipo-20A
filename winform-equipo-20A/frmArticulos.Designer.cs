@@ -1,4 +1,4 @@
-﻿namespace winform_equipo_20A
+﻿namespace Winform_Equipo_20A
 {
     partial class frmArticulos
     {

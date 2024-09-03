@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace winform_equipo_20A
+namespace Winform_Equipo_20A
 {
     internal static class Program
     {

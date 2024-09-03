@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace winform_equipo_20A
+namespace Winform_Equipo_20A
 {
     public partial class frmArticulos : Form
     {
