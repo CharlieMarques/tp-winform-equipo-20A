@@ -13,7 +13,7 @@ namespace Dominio
             Descripcion = descripcion;
         }
         public Marca() { }
-        public int Id { get; } //el id es autonimerico en la base de datos no deberia de tener set, en todo caso un metodo que lo convierta en autonumerico
+        public int Id { get; set; } //el id es autonumerico en la base de datos no deberia de tener set, en todo caso un metodo que lo convierta en autonumerico
         public string Descripcion { get; set; }
         public override string ToString()
         {
