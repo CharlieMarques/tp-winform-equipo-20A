@@ -14,10 +14,7 @@ namespace Catalogo_Comercio
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
-        public SqlDataReader Lector
-        {
-            get { return lector; }
-        }
+        public SqlDataReader Lector { get { return lector; } }
         public AccesoDatos()
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
@@ -34,11 +31,10 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-        public void EjecutarConsulta()
+        public void ejecutarConsulta()
         {
             comando.Connection = conexion;
             try
@@ -48,7 +44,6 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -60,7 +55,9 @@ namespace Catalogo_Comercio
         public void cerrarConexion()
         {
             if (lector != null)
+            {
                 lector.Close();
+            }
             conexion.Close();
         }
     }
