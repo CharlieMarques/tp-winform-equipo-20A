@@ -31,7 +31,7 @@ namespace Catalogo_Comercio
                     //aux.Marca = (Marca)datos.Lector["Marca"];
                     //aux.Categoria = (Categoria)datos.Lector["Categoria"];
                     //aux.Imagen= (Imagen)datos.Lector["Imagen"];
-                    aux.Precio = (float)datos.Lector["Precio"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
                     lista.Add(aux);
                 }
                 return lista;

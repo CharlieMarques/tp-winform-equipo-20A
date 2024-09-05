@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Catalogo_Comercio;
 using System.Xml.Linq;
 using Dominio;
 
 
 namespace Catalogo_Comercio
 {
-    public class ArtículoBD
+    public class ArticuloBD
     {
         public List<Articulo> listar()
         {
@@ -19,8 +18,8 @@ namespace Catalogo_Comercio
 
             try
             {
-                datos.setConsulta("Select Id, Codigo, Nombre, Descripcion, Marca, Categoria, Imagen, Precio From ARTICULOS");
-                datos.ejecutarConsulta();
+                datos.setConsulta("Select A.Id, A.Codigo, A.Nombre,A.Descripcion,Precio, C.Descripcion Categoria, M.Descripcion Marca, A.IdCategoria, A.IdMarca From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id and A.IdMarca = M.Id ");
+                datos.Leer();
 
                 while (datos.Lector.Read())
                 {
@@ -29,10 +28,14 @@ namespace Catalogo_Comercio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Marca = (Marca)datos.Lector["Marca"];
-                    aux.Categoria = (Categoria)datos.Lector["Categoria"];
-                    aux.Imagen = (Imagen)datos.Lector["Imagen"];
-                    aux.Precio = (float)datos.Lector["Precio"];
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                   // aux.Imagen = (Imagen)datos.Lector["Imagen"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
                     lista.Add(aux);
                 }
                 return lista;

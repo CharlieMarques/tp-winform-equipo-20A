@@ -1,30 +1,32 @@
-﻿using Dominio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio;
 
 namespace Catalogo_Comercio
 {
-    public class CategoriaBD
+    public class MarcaBD
     {
-        List<Categoria> listar()
+        public List<Marca> listar()
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<Marca>lista = new List<Marca>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("Select Id, Descripcion from CATEGORIAS");
+                datos.setConsulta("Select Id, Descripcion From MARCAS");
                 datos.Leer();
+
                 while(datos.Lector.Read())
                 {
-                    Categoria aux = new Categoria();
-                    aux.Id = (int)datos.Lector["Id"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    Marca aux = new Marca();
+                    aux.Id =(int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Description"];
                     lista.Add(aux);
                 }
                 return lista;
+
             }
             catch (Exception ex)
             {
@@ -35,7 +37,6 @@ namespace Catalogo_Comercio
             {
                 datos.cerrarConexion();
             }
-
         }
     }
 }
