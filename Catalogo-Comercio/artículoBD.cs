@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Catalogo_Comercio;
 using System.Xml.Linq;
 using Dominio;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace Catalogo_Comercio
 {
-    internal class artículoBD
+    public class ArtículoBD
     {
         public List<Articulo> listar()
         {
@@ -46,7 +46,7 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
-        PublicKey void agregar(Articulo nuevo)
+        void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
