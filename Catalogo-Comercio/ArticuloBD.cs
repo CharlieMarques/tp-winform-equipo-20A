@@ -49,7 +49,7 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
-        void agregar(Articulo nuevo)
+        public void agregar(Articulo nuevo) // public?
         {
             AccesoDatos datos = new AccesoDatos();
 
