@@ -67,14 +67,22 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
-        public void agregar(Articulo nuevo)
+        public void modificar(Articulo nuevoArticulo)
         {
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
-                datos.setConsulta("Insert Into ARTICULOS (Id, Codigo, Nombre, Descripcion, Marca, Categoria, Imagen, Precio) Values ('" + nuevo.Id + "', '" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.Marca + "', '" + nuevo.Categoria + "', '" + nuevo.Imagen + "', '" + nuevo.Precio + "')");
-                datos.ejecutarConsulta();
+                datos.setConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Marca = @Marca, Categoria = @Categoria, Imagen = @Imagen, Precio = @Precio Where Id = @Id");
+                datos.setParametro("@Id", nuevoArticulo.Id);
+                datos.setParametro("@Codigo", nuevoArticulo.Codigo);
+                datos.setParametro("@Nombre", nuevoArticulo.Nombre);
+                datos.setParametro("@Descripcion", nuevoArticulo.Descripcion);
+                datos.setParametro("@Marca", nuevoArticulo.Marca);
+                datos.setParametro("@Categoria", nuevoArticulo.Categoria);
+                datos.setParametro("@Imagen", nuevoArticulo.Imagen);
+                datos.setParametro("@Precio", nuevoArticulo.Precio);
+
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
