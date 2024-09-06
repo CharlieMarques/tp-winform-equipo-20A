@@ -67,5 +67,23 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("Insert Into ARTICULOS (Id, Codigo, Nombre, Descripcion, Marca, Categoria, Imagen, Precio) Values ('" + nuevo.Id + "', '" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.Marca + "', '" + nuevo.Categoria + "', '" + nuevo.Imagen + "', '" + nuevo.Precio + "')");
+                datos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
