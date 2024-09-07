@@ -9,7 +9,7 @@ namespace Catalogo_Comercio
 {
     public class CategoriaBD
     {
-        List<Categoria> listar()
+       public List<Categoria> listar()
         {
             List<Categoria> lista = new List<Categoria>();
             AccesoDatos datos = new AccesoDatos();

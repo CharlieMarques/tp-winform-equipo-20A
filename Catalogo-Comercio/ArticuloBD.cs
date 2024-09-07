@@ -83,7 +83,7 @@ namespace Catalogo_Comercio
                 datos.setParametro("@Imagen", nuevoArticulo.Imagen);
                 datos.setParametro("@Precio", nuevoArticulo.Precio);
 
-                datos.ejecutarAccion();
+                datos.ejecutarConsulta();
             }
             catch (Exception ex)
             {

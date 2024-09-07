@@ -25,10 +25,27 @@ namespace Winform_Equipo_20A
             listaArticulo = articuloBD.listar();
             
             dgvArticulos.DataSource = listaArticulo;
+            OcultarColumnas();
         }
 
         private void frmArticulos_Load(object sender, EventArgs e)
         {
+            CargarDatos();
+        }
+
+        //oculta las columnas en el data grid view
+        private void OcultarColumnas()
+        {
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["Codigo"].Visible = false;
+            dgvArticulos.Columns["Imagen"].Visible = false;
+            dgvArticulos.Columns["Descripcion"].Visible = false;
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregarArticulos agregarArticulo = new frmAgregarArticulos();
+            agregarArticulo.ShowDialog();
             CargarDatos();
         }
     }
