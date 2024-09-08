@@ -24,7 +24,7 @@ namespace Winform_Equipo_20A
         {
             ArticuloBD articuloBD = new ArticuloBD();
             listaArticulo = articuloBD.listar();
-            
+
             dgvArticulos.DataSource = listaArticulo;
             OcultarColumnas();
         }
@@ -32,13 +32,16 @@ namespace Winform_Equipo_20A
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            cbxCampo.Items.Add("Nombre");
+            cbxCampo.Items.Add("Descripcion");
+            cbxCampo.Items.Add("Precio");
         }
 
         //oculta las columnas en el data grid view
         private void OcultarColumnas()
         {
             dgvArticulos.Columns["Id"].Visible = false;
-           // dgvArticulos.Columns["Codigo"].Visible = false;
+            // dgvArticulos.Columns["Codigo"].Visible = false;
             dgvArticulos.Columns["Imagen"].Visible = false;
             dgvArticulos.Columns["Descripcion"].Visible = false;
         }
@@ -97,7 +100,42 @@ namespace Winform_Equipo_20A
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
             OcultarColumnas();
-            
+
+        }
+
+        private void btnFiltroAvanzado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            cbxCampo.SelectedIndex = -1;
+            cbxCriterio.SelectedIndex = -1;
+        }
+
+        private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbxCampo.SelectedItem != null)
+            {
+
+                string campo = cbxCampo.SelectedItem.ToString();
+                if (campo == "Precio")
+                {
+                    cbxCriterio.Items.Clear();
+                    cbxCriterio.Items.Add("Menores a");
+                    cbxCriterio.Items.Add("Hasta");
+                    cbxCriterio.Items.Add("Mayores a ");
+                }
+                else
+                {
+                    cbxCriterio.Items.Clear();
+                    cbxCriterio.Items.Add("Todos");
+                    cbxCriterio.Items.Add("Empieza con");
+                    cbxCriterio.Items.Add("Termina con");
+                    cbxCriterio.Items.Add("Contiene");
+                }
+            }
         }
     }
 }
