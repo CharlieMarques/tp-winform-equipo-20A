@@ -19,6 +19,12 @@ namespace Winform_Equipo_20A
         {
             InitializeComponent();
         }
+        public frmAgregarArticulos(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Articulo";
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -26,9 +32,9 @@ namespace Winform_Equipo_20A
         }
         private bool SoloNumeros(string cadena)
         {
-            foreach(char character in cadena)
+            foreach (char character in cadena)
             {
-                if(!(char.IsNumber(character)))
+                if (!(char.IsNumber(character)))
                     return false;
             }
             return true;
@@ -38,7 +44,7 @@ namespace Winform_Equipo_20A
             ArticuloBD articuloBD = new ArticuloBD();
             try
             {
-                if(articulo == null)
+                if (articulo == null)
                     articulo = new Articulo();
                 string precio;
                 articulo.Codigo = tbCodArticulo.Text;
@@ -46,6 +52,9 @@ namespace Winform_Equipo_20A
                 articulo.Descripcion = tbDescripcion.Text;
                 if (string.IsNullOrEmpty(tbPrecio.Text))
                     MessageBox.Show("Debe ingresar un precio");
+                else if (SoloNumeros(tbPrecio.Text))
+                    MessageBox.Show("Ingresar solo numeros");
+
                 else
                 {
                     precio = tbPrecio.Text;
@@ -84,6 +93,15 @@ namespace Winform_Equipo_20A
                 cbxCategoria.DataSource = categoriaBD.listar();
                 cbxCategoria.ValueMember = "Id";
                 cbxCategoria.DisplayMember = "Descripcion";
+                if(articulo != null)
+                {
+                    tbCodArticulo.Text = articulo.Codigo;
+                    tbDescripcion.Text = articulo.Descripcion;
+                    tbNombre.Text = articulo.Nombre;
+                    tbPrecio.Text = articulo.Precio.ToString();
+                    cbxCategoria.SelectedValue = articulo.Categoria.Id;
+                    cbxMarca.SelectedValue = articulo.Marca.Id;
+                }
             }
             catch (Exception ex)
             {

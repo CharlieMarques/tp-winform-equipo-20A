@@ -15,6 +15,7 @@ namespace Winform_Equipo_20A
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulo;
+        Articulo seleccionado = null;
         public frmArticulos()
         {
             InitializeComponent();
@@ -48,5 +49,36 @@ namespace Winform_Equipo_20A
             agregarArticulo.ShowDialog();
             CargarDatos();
         }
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow != null)
+            {
+                Articulo select = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvArticulos.SelectedRows.Count != 0)
+                {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    frmAgregarArticulos modificar = new frmAgregarArticulos(seleccionado);
+                    modificar.ShowDialog();
+                    CargarDatos();
+                }
+                else
+                    MessageBox.Show("Selecione un articulo para poder modificarlo");
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
     }
 }
