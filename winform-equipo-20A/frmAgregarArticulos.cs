@@ -52,7 +52,7 @@ namespace Winform_Equipo_20A
                 articulo.Descripcion = tbDescripcion.Text;
                 if (string.IsNullOrEmpty(tbPrecio.Text))
                     MessageBox.Show("Debe ingresar un precio");
-                else if (SoloNumeros(tbPrecio.Text))
+                else if (!SoloNumeros(tbPrecio.Text))
                     MessageBox.Show("Ingresar solo numeros");
 
                 else
@@ -67,9 +67,17 @@ namespace Winform_Equipo_20A
                     MessageBox.Show("Los campos con * son obligatorios");
                 else
                 {
-                    articuloBD.agregar(articulo);
-                    MessageBox.Show("Agregado con Exito!!!");
-                    Close();
+                    if (articulo.Id != 0)
+                    {
+                        articuloBD.modificar(articulo);
+                        MessageBox.Show("Modificado con Exito");
+                    }
+                    else
+                    {
+                        articuloBD.agregar(articulo);
+                        MessageBox.Show("Agregado con Exito!!!");
+                    }
+                Close();
                 }
 
             }
@@ -93,7 +101,7 @@ namespace Winform_Equipo_20A
                 cbxCategoria.DataSource = categoriaBD.listar();
                 cbxCategoria.ValueMember = "Id";
                 cbxCategoria.DisplayMember = "Descripcion";
-                if(articulo != null)
+                if (articulo != null)
                 {
                     tbCodArticulo.Text = articulo.Codigo;
                     tbDescripcion.Text = articulo.Descripcion;
