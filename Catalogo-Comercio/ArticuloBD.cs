@@ -56,7 +56,13 @@ namespace Catalogo_Comercio
 
             try
             {
-                datos.setConsulta("Insert Into ARTICULOS (Id, Codigo, Nombre, Descripcion, Marca, Categoria, Imagen, Precio) Values ('" + nuevo.Id + "', '" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', '" + nuevo.Marca + "', '" + nuevo.Categoria + "', '" + nuevo.Imagen + "', '" + nuevo.Precio + "')");
+                datos.setConsulta("Insert Into ARTICULOS (Codigo, Nombre, Descripcion, idMarca, idCategoria, Precio) Values (@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria,@Precio)");
+                datos.setParametro("@Codigo", nuevo.Codigo);
+                datos.setParametro("@Nombre", nuevo.Nombre);
+                datos.setParametro("@Descripcion", nuevo.Descripcion);
+                datos.setParametro("@idMarca", nuevo.Marca.Id);
+                datos.setParametro("@idCategoria", nuevo.Categoria.Id);
+                datos.setParametro("@Precio", nuevo.Precio);
                 datos.ejecutarConsulta();
             }
             catch (Exception ex)
