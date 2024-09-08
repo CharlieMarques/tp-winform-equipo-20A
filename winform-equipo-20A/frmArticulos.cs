@@ -38,7 +38,7 @@ namespace Winform_Equipo_20A
         private void OcultarColumnas()
         {
             dgvArticulos.Columns["Id"].Visible = false;
-            dgvArticulos.Columns["Codigo"].Visible = false;
+           // dgvArticulos.Columns["Codigo"].Visible = false;
             dgvArticulos.Columns["Imagen"].Visible = false;
             dgvArticulos.Columns["Descripcion"].Visible = false;
         }
@@ -79,6 +79,25 @@ namespace Winform_Equipo_20A
             }
         }
 
+        private void tbFiltroCodigo_TextChanged(object sender, EventArgs e)
+        {
+            filtroRapido();
+        }
 
+        private void filtroRapido()
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = tbFiltroCodigo.Text;
+            if (filtro.Length >= 1)
+            {
+                listaFiltrada = listaArticulo.FindAll(x => x.Codigo.ToLower().Contains(filtro.ToLower()));
+            }
+            else
+                listaFiltrada = listaArticulo;
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+            OcultarColumnas();
+            
+        }
     }
 }
