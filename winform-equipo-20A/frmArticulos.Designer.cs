@@ -43,7 +43,9 @@
             this.tbFiltroAvanzado = new System.Windows.Forms.TextBox();
             this.btnLimpiarFiltro = new System.Windows.Forms.Button();
             this.btnFiltroAvanzado = new System.Windows.Forms.Button();
+            this.pbxArticulo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -185,11 +187,22 @@
             this.btnFiltroAvanzado.UseVisualStyleBackColor = true;
             this.btnFiltroAvanzado.Click += new System.EventHandler(this.btnFiltroAvanzado_Click);
             // 
+            // pbxArticulo
+            // 
+            this.pbxArticulo.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.pbxArticulo.Location = new System.Drawing.Point(598, 135);
+            this.pbxArticulo.Name = "pbxArticulo";
+            this.pbxArticulo.Size = new System.Drawing.Size(190, 254);
+            this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbxArticulo.TabIndex = 15;
+            this.pbxArticulo.TabStop = false;
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.btnLimpiarFiltro);
             this.Controls.Add(this.btnFiltroAvanzado);
             this.Controls.Add(this.tbFiltroAvanzado);
@@ -209,6 +222,7 @@
             this.Text = "frmArticulos";
             this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +245,6 @@
         private System.Windows.Forms.TextBox tbFiltroAvanzado;
         private System.Windows.Forms.Button btnFiltroAvanzado;
         private System.Windows.Forms.Button btnLimpiarFiltro;
+        private System.Windows.Forms.PictureBox pbxArticulo;
     }
 }

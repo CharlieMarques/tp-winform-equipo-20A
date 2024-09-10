@@ -24,9 +24,21 @@ namespace Winform_Equipo_20A
         {
             ArticuloBD articuloBD = new ArticuloBD();
             listaArticulo = articuloBD.listar();
-
             dgvArticulos.DataSource = listaArticulo;
             OcultarColumnas();
+        }
+
+        private void CargarImagen(string url)
+        {
+            try
+            {
+                pbxArticulo.Load(url);
+                pbxArticulo.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch (Exception)
+            {
+                pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
+            }
         }
 
         private void frmArticulos_Load(object sender, EventArgs e)
@@ -56,7 +68,8 @@ namespace Winform_Equipo_20A
         {
             if (dgvArticulos.CurrentRow != null)
             {
-                Articulo select = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                Articulo select = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
+                CargarImagen(select.Imagen.urlImagen);
             }
         }
 

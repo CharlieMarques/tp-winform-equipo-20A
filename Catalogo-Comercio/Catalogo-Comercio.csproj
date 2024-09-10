@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="ArticuloBD.cs" />
-    <Compile Include="Catalogo_Comercio.cs" />
     <Compile Include="CategoriaBD.cs" />
     <Compile Include="MarcaBD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

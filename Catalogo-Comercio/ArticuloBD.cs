@@ -19,7 +19,8 @@ namespace Catalogo_Comercio
 
             try
             {
-                datos.setConsulta("Select A.Id, A.Codigo, A.Nombre,A.Descripcion,Precio, C.Descripcion Categoria, M.Descripcion Marca, A.IdCategoria, A.IdMarca From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id and A.IdMarca = M.Id ");
+
+                datos.setConsulta("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion as Categoria, M.Descripcion as Marca, A.IdCategoria, A.IdMarca, I.Id as IdImagen, I.ImagenUrl as UrlImagen From ARTICULOS as A, CATEGORIAS as C, MARCAS as M, IMAGENES as I  Where A.IdCategoria = C.Id and A.IdMarca = M.Id and I.IdArticulo = A.Id");
                 datos.Leer();
 
                 while (datos.Lector.Read())
@@ -37,6 +38,9 @@ namespace Catalogo_Comercio
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     // aux.Imagen = (Imagen)datos.Lector["Imagen"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Imagen = new Imagen();
+                    aux.Imagen.Id = (int)datos.Lector["IdImagen"];
+                    aux.Imagen.urlImagen = (string)datos.Lector["UrlImagen"];
                     lista.Add(aux);
                 }
                 return lista;
