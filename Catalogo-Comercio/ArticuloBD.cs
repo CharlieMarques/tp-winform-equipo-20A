@@ -16,11 +16,12 @@ namespace Catalogo_Comercio
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
+            ImagenDB imagenDB = new ImagenDB();
 
             try
             {
 
-                datos.setConsulta("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion as Categoria, M.Descripcion as Marca, A.IdCategoria, A.IdMarca, I.Id as IdImagen, I.ImagenUrl as UrlImagen From ARTICULOS as A, CATEGORIAS as C, MARCAS as M, IMAGENES as I  Where A.IdCategoria = C.Id and A.IdMarca = M.Id and I.IdArticulo = A.Id");
+                datos.setConsulta("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion as Categoria, M.Descripcion as Marca, A.IdCategoria, A.IdMarca From ARTICULOS as A, CATEGORIAS as C, MARCAS as M Where A.IdCategoria = C.Id and A.IdMarca = M.Id");
                 datos.Leer();
 
                 while (datos.Lector.Read())
@@ -36,11 +37,8 @@ namespace Catalogo_Comercio
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    // aux.Imagen = (Imagen)datos.Lector["Imagen"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    aux.Imagen = new Imagen();
-                    aux.Imagen.Id = (int)datos.Lector["IdImagen"];
-                    aux.Imagen.urlImagen = (string)datos.Lector["UrlImagen"];
+                    aux.Imagen = imagenDB.GetImagen(aux.Id);
                     lista.Add(aux);
                 }
                 return lista;

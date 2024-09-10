@@ -68,8 +68,8 @@ namespace Winform_Equipo_20A
         {
             if (dgvArticulos.CurrentRow != null)
             {
-                Articulo select = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(select.Imagen.urlImagen);
+                seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
+                CargarImagen(seleccionado.Imagen.UrlImagen);
             }
         }
 
