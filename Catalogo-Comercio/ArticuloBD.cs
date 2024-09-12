@@ -101,6 +101,21 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
+        public void Eliminar(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("Delete From Articulos Where id = @id");
+                datos.setParametro("@id", idArticulo);
+                datos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();

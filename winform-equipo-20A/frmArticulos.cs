@@ -211,5 +211,33 @@ namespace Winform_Equipo_20A
                 }
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloBD articuloEliminar = new ArticuloBD();
+            try
+            {
+            if(dgvArticulos.SelectedRows.Count !=0)
+            {
+                DialogResult repuesta = MessageBox.Show("¿Realmente desea eliminar este articulo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (repuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    articuloEliminar.Eliminar(seleccionado.Id);
+                    CargarDatos();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un articulo para eliminar");
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

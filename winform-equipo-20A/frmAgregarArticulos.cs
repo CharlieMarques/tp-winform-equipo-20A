@@ -32,9 +32,14 @@ namespace Winform_Equipo_20A
         }
         private bool SoloNumeros(string cadena)
         {
+            int cantComa = 0;
             foreach (char character in cadena)
             {
-                if (!(char.IsNumber(character)))
+                if (!(char.IsNumber(character) || character == ','))
+                    return false;
+                if(character == ',')
+                    cantComa++;
+                if(cantComa >1)
                     return false;
             }
             return true;
@@ -52,6 +57,7 @@ namespace Winform_Equipo_20A
                 articulo.Descripcion = tbDescripcion.Text;
                 if (string.IsNullOrEmpty(tbPrecio.Text))
                     MessageBox.Show("Debe ingresar un precio");
+
                 else if (!SoloNumeros(tbPrecio.Text))
                     MessageBox.Show("Ingresar solo numeros");
 
@@ -60,7 +66,6 @@ namespace Winform_Equipo_20A
                     precio = tbPrecio.Text;
                     precio = precio.Replace('.', ',');
                     articulo.Precio = decimal.Parse(precio);
-                }
                 articulo.Marca = (Marca)cbxMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
                 if (string.IsNullOrEmpty(articulo.Codigo) || string.IsNullOrEmpty(articulo.Nombre))
@@ -78,6 +83,7 @@ namespace Winform_Equipo_20A
                         MessageBox.Show("Agregado con Exito!!!");
                     }
                 Close();
+                }
                 }
 
             }
