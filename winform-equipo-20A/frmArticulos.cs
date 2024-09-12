@@ -26,6 +26,7 @@ namespace Winform_Equipo_20A
             listaArticulo = articuloBD.listar();
             dgvArticulos.DataSource = listaArticulo;
             OcultarColumnas();
+            CargarImagen(listaArticulo[0].Imagen.UrlImagen);
         }
 
         private void CargarImagen(string url)
@@ -68,8 +69,8 @@ namespace Winform_Equipo_20A
         {
             if (dgvArticulos.CurrentRow != null)
             {
-                seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(seleccionado.Imagen.UrlImagen);
+               // Articulo seleccionad = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
+                //CargarImagen(seleccionad.Imagen.UrlImagen);
             }
         }
 
@@ -115,16 +116,76 @@ namespace Winform_Equipo_20A
             OcultarColumnas();
 
         }
-
+        private bool sinSeleccion(ComboBox cbx)
+        {
+            if (cbx.SelectedIndex < 0)
+                return true;
+            else
+                return false;
+                  
+        }
+        private bool soloNumeros(string cadena)
+        {
+            foreach(char character in cadena)
+            {
+                if(!(char.IsNumber(character)))
+                    return false;
+            }
+            return true;
+        }
         private void btnFiltroAvanzado_Click(object sender, EventArgs e)
         {
+            ArticuloBD articulo = new ArticuloBD();
+            try
+            {
+                string campo, criterio, filtro;
+                if (sinSeleccion(cbxCampo))
+                    MessageBox.Show("No puede dejar el campo vacio para filtrar");
+                else
+                {
+                    campo = cbxCampo.SelectedItem.ToString();
+                    if(sinSeleccion(cbxCriterio))
+                    {
+                        if(campo != "Precio")
+                        {
+                            cbxCriterio.SelectedItem = "Todos";
+                            criterio = "Todos";
+                        }
+                        else
+                        {
+                            cbxCriterio.SelectedItem = "Hasta";
+                            criterio = "Hasta";
+                        }
+                    }
+                    else
+                        criterio = cbxCriterio.SelectedItem.ToString();
+                    if (cbxCampo.SelectedItem == "Precio" && !(soloNumeros(tbFiltroAvanzado.Text)))
+                        MessageBox.Show("Ingresar solo numeros");
+                    else if(cbxCampo.SelectedItem == "Precio" && string.IsNullOrEmpty(tbFiltroAvanzado.Text))
+                    {
+                        MessageBox.Show("El filtro no puede quedar vacio para poder filtrar por precio");
+                        CargarDatos();
+                    }
+                    else
+                    {
+                        filtro = tbFiltroAvanzado.Text;
+                        dgvArticulos.DataSource = articulo.filtrar(campo, criterio, filtro);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
             cbxCampo.SelectedIndex = -1;
             cbxCriterio.SelectedIndex = -1;
+            tbFiltroAvanzado.Text = null;
+            CargarDatos();
         }
 
         private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)

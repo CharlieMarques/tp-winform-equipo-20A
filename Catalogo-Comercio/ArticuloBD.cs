@@ -107,8 +107,8 @@ namespace Catalogo_Comercio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "Select A.Id, A.Codigo, A.Nombre,A.Descripcion,Precio, C.Descripcion Categoria, M.Descripcion Marca, A.IdCategoria, A.IdMarca From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id and A.IdMarca = M.Id ";
-                if (campo != "Precio")
+                string consulta = "Select A.Id, A.Codigo, A.Nombre,A.Descripcion,Precio, C.Descripcion Categoria, M.Descripcion Marca, A.IdCategoria, A.IdMarca From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id and A.IdMarca = M.Id and ";
+                if (campo == "Precio")
                 {
                     switch (criterio)
                     {
