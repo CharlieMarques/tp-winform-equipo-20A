@@ -15,14 +15,15 @@ namespace Winform_Equipo_20A
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulo;
-        Articulo seleccionado = null;
+        private ArticuloBD articuloBD = new ArticuloBD();
+
+        Articulo seleccionado;
         public frmArticulos()
         {
             InitializeComponent();
         }
         private void CargarDatos()
         {
-            ArticuloBD articuloBD = new ArticuloBD();
             listaArticulo = articuloBD.listar();
             dgvArticulos.DataSource = listaArticulo;
             OcultarColumnas();
@@ -36,8 +37,10 @@ namespace Winform_Equipo_20A
                 pbxArticulo.Load(url);
                 pbxArticulo.SizeMode = PictureBoxSizeMode.Zoom;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
             }
         }
@@ -69,8 +72,8 @@ namespace Winform_Equipo_20A
         {
             if (dgvArticulos.CurrentRow != null)
             {
-               // Articulo seleccionad = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                //CargarImagen(seleccionad.Imagen.UrlImagen);
+                seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
+                CargarImagen(seleccionado.Imagen.UrlImagen);
             }
         }
 
@@ -85,14 +88,12 @@ namespace Winform_Equipo_20A
                     modificar.ShowDialog();
                     CargarDatos();
                 }
-                else
-                    MessageBox.Show("Selecione un articulo para poder modificarlo");
-
+                else MessageBox.Show($"Selecione un articulo para poder modificarlo", $"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Console.WriteLine($"Error: {ex.ToString()}");
             }
         }
 
@@ -135,12 +136,11 @@ namespace Winform_Equipo_20A
         }
         private void btnFiltroAvanzado_Click(object sender, EventArgs e)
         {
-            ArticuloBD articulo = new ArticuloBD();
+            //ArticuloBD articulo = new ArticuloBD();
             try
             {
                 string campo, criterio, filtro;
-                if (sinSeleccion(cbxCampo))
-                    MessageBox.Show("No puede dejar el campo vacio para filtrar");
+                if (sinSeleccion(cbxCampo)) MessageBox.Show($"Complete el campo y criterio a filtrar", $"Error al filtrar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
                     campo = cbxCampo.SelectedItem.ToString();
@@ -159,9 +159,9 @@ namespace Winform_Equipo_20A
                     }
                     else
                         criterio = cbxCriterio.SelectedItem.ToString();
-                    if (cbxCampo.SelectedItem == "Precio" && !(soloNumeros(tbFiltroAvanzado.Text)))
+                    if ((string)cbxCampo.SelectedItem == "Precio" && !(soloNumeros(tbFiltroAvanzado.Text)))
                         MessageBox.Show("Ingresar solo numeros");
-                    else if(cbxCampo.SelectedItem == "Precio" && string.IsNullOrEmpty(tbFiltroAvanzado.Text))
+                    else if((string)cbxCampo.SelectedItem == "Precio" && string.IsNullOrEmpty(tbFiltroAvanzado.Text))
                     {
                         MessageBox.Show("El filtro no puede quedar vacio para poder filtrar por precio");
                         CargarDatos();
@@ -169,7 +169,9 @@ namespace Winform_Equipo_20A
                     else
                     {
                         filtro = tbFiltroAvanzado.Text;
-                        dgvArticulos.DataSource = articulo.filtrar(campo, criterio, filtro);
+                        List<Articulo> listaArticulo_ = articuloBD.filtrar(campo, criterio, filtro);
+                        dgvArticulos.DataSource = listaArticulo_;
+                        Console.WriteLine();
                     }
                 }
             }

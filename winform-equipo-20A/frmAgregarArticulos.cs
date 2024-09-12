@@ -56,41 +56,46 @@ namespace Winform_Equipo_20A
                 articulo.Nombre = tbNombre.Text;
                 articulo.Descripcion = tbDescripcion.Text;
                 if (string.IsNullOrEmpty(tbPrecio.Text))
-                    MessageBox.Show("Debe ingresar un precio");
-
+                {
+                    MessageBox.Show($"Debe ingresar el precio", $"Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 else if (!SoloNumeros(tbPrecio.Text))
-                    MessageBox.Show("Ingresar solo numeros");
+                {
+                    MessageBox.Show($"El precio debe ser un número válido", $"Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 else
                 {
                     precio = tbPrecio.Text;
                     precio = precio.Replace('.', ',');
                     articulo.Precio = decimal.Parse(precio);
-                articulo.Marca = (Marca)cbxMarca.SelectedItem;
-                articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
-                if (string.IsNullOrEmpty(articulo.Codigo) || string.IsNullOrEmpty(articulo.Nombre))
-                    MessageBox.Show("Los campos con * son obligatorios");
-                else
-                {
-                    if (articulo.Id != 0)
+                    articulo.Marca = (Marca)cbxMarca.SelectedItem;
+                    articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+                    if (string.IsNullOrEmpty(articulo.Codigo) || string.IsNullOrEmpty(articulo.Nombre))
                     {
-                        articuloBD.modificar(articulo);
-                        MessageBox.Show("Modificado con Exito");
+                        MessageBox.Show($"Los campos con asterisco (*) son obligatorios", $"Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        articuloBD.agregar(articulo);
-                        MessageBox.Show("Agregado con Exito!!!");
+                        if (articulo.Id != 0)
+                        {
+                            articuloBD.modificar(articulo);
+                            MessageBox.Show($"Se modificó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            articuloBD.agregar(articulo);
+                            MessageBox.Show($"Se agregó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        Close();
                     }
-                Close();
-                }
                 }
 
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al cargar los artículos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
             }
         }
 
@@ -119,10 +124,9 @@ namespace Winform_Equipo_20A
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al cargar las marcas y categorias", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
             }
-
         }
     }
 }

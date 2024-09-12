@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dominio;
+using System.Windows.Forms;
 
 namespace Catalogo_Comercio
 {
@@ -17,7 +17,7 @@ namespace Catalogo_Comercio
         public SqlDataReader Lector { get { return lector; } }
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS02; database=CATALOGO_P3_DB; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
@@ -31,6 +31,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al abrir la conexón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
         }
@@ -44,6 +46,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al abrir la conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
         }

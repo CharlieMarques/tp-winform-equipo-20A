@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Dominio;
 
 namespace Catalogo_Comercio
@@ -31,7 +32,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
             finally

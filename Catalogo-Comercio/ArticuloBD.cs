@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using Dominio;
 
@@ -45,6 +46,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
             finally
@@ -69,6 +72,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
             finally
@@ -94,6 +99,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
             finally
@@ -112,7 +119,8 @@ namespace Catalogo_Comercio
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al abrir la conexón", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
         }
@@ -120,6 +128,8 @@ namespace Catalogo_Comercio
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
+            ImagenDB imagenDB = new ImagenDB();
+
             try
             {
                 string consulta = "Select A.Id, A.Codigo, A.Nombre,A.Descripcion,Precio, C.Descripcion Categoria, M.Descripcion Marca, A.IdCategoria, A.IdMarca From ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id and A.IdMarca = M.Id and ";
@@ -183,21 +193,18 @@ namespace Catalogo_Comercio
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    // aux.Imagen = (Imagen)datos.Lector["Imagen"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Imagen = imagenDB.GetImagen(aux.Id);
                     lista.Add(aux);
                 }
                 return lista;
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error: {ex.ToString()}");
                 throw ex;
             }
-            //cerrar conexion???
-            /*finally
-            {
-                datos.cerrarConexion();
-            }*/
         }
     }
 }
