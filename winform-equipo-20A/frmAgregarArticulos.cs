@@ -15,15 +15,34 @@ namespace Winform_Equipo_20A
     public partial class frmAgregarArticulos : Form
     {
         private Articulo articulo = null;
+        private Imagen imagen = null;
+        private bool AgregarOtraImagen = false;
         public frmAgregarArticulos()
         {
             InitializeComponent();
+            AgregarOtraImagen = false;
         }
         public frmAgregarArticulos(Articulo articulo)
         {
             InitializeComponent();
             this.articulo = articulo;
             Text = "Modificar Articulo";
+            AgregarOtraImagen = false;
+        }
+        public frmAgregarArticulos(Articulo articulo, Imagen imagen, bool AgregarImagen)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            this.imagen = imagen;
+            AgregarOtraImagen = AgregarImagen;
+            
+            Text = "Agregar Foto";
+            tbCodArticulo.ReadOnly = true;
+            tbNombre.ReadOnly = true;
+            tbDescripcion.ReadOnly = true;
+            tbPrecio.ReadOnly = true;
+            cbxCategoria.Enabled = false;
+            cbxMarca.Enabled = false;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -47,6 +66,7 @@ namespace Winform_Equipo_20A
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloBD articuloBD = new ArticuloBD();
+            ImagenDB imagenDB = new ImagenDB();
             try
             {
                 if (articulo == null)
@@ -77,16 +97,29 @@ namespace Winform_Equipo_20A
                     }
                     else
                     {
-                        if (articulo.Id != 0)
+                        if(!AgregarOtraImagen)
                         {
-                            articuloBD.modificar(articulo);
-                            MessageBox.Show($"Se modificó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (articulo.Id != 0)
+                            {
+                                articuloBD.modificar(articulo);
+                                MessageBox.Show($"Se modificó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else 
+                            {
+                                if (!(string.IsNullOrEmpty(tbImagen.Text)))
+                                    imagenDB.AgregarImagen(articuloBD.agregar(articulo), tbImagen.Text);
+                                else
+                                    articuloBD.agregar(articulo);
+
+                                MessageBox.Show($"Se agregó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                         else
                         {
-                            articuloBD.agregar(articulo);
-                            MessageBox.Show($"Se agregó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            imagenDB.AgregarImagen(articulo.Id, tbImagen.Text);
+                            MessageBox.Show($"Se agregó exitosamente La imagen", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
+
                         Close();
                     }
                 }

@@ -16,8 +16,9 @@ namespace Winform_Equipo_20A
     {
         private List<Articulo> listaArticulo;
         private ArticuloBD articuloBD = new ArticuloBD();
-
+        Imagen imagen = new Imagen();
         Articulo seleccionado;
+
         public frmArticulos()
         {
             InitializeComponent();
@@ -37,10 +38,8 @@ namespace Winform_Equipo_20A
                 pbxArticulo.Load(url);
                 pbxArticulo.SizeMode = PictureBoxSizeMode.Zoom;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Console.WriteLine($"Error: {ex.ToString()}");
                 pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
             }
         }
@@ -239,6 +238,26 @@ namespace Winform_Equipo_20A
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvArticulos.SelectedRows.Count != 0)
+                {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    frmAgregarArticulos AgregarImagen = new frmAgregarArticulos(seleccionado,imagen,true);
+                    AgregarImagen.ShowDialog();
+                    CargarDatos();
+                }
+                else MessageBox.Show($"Selecione un articulo para poder agregar un imagen", $"Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Console.WriteLine($"Error: {ex.ToString()}");
             }
         }
     }

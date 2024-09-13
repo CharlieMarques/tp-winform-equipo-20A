@@ -42,6 +42,8 @@
             this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.tbImagen = new System.Windows.Forms.TextBox();
+            this.lblImagen = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCodArticulo
@@ -162,11 +164,29 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // tbImagen
+            // 
+            this.tbImagen.Location = new System.Drawing.Point(159, 195);
+            this.tbImagen.Name = "tbImagen";
+            this.tbImagen.Size = new System.Drawing.Size(150, 20);
+            this.tbImagen.TabIndex = 14;
+            // 
+            // lblImagen
+            // 
+            this.lblImagen.AutoSize = true;
+            this.lblImagen.Location = new System.Drawing.Point(111, 198);
+            this.lblImagen.Name = "lblImagen";
+            this.lblImagen.Size = new System.Drawing.Size(48, 13);
+            this.lblImagen.TabIndex = 15;
+            this.lblImagen.Text = "Imagen :";
+            // 
             // frmAgregarArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(401, 386);
+            this.Controls.Add(this.lblImagen);
+            this.Controls.Add(this.tbImagen);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cbxCategoria);
@@ -205,5 +225,7 @@
         private System.Windows.Forms.ComboBox cbxCategoria;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox tbImagen;
+        private System.Windows.Forms.Label lblImagen;
     }
 }

@@ -51,5 +51,21 @@ namespace Catalogo_Comercio
             
             return imagen;
         }
+        public void AgregarImagen(int IdArticulo, string UrlImagen)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("Insert into Imagenes (IdArticulo, ImagenUrl) values (@IdArticulo, @ImagenUrl)");
+                datos.setParametro("@IdArticulo",IdArticulo);
+                datos.setParametro("@ImagenUrl", UrlImagen);
+                datos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

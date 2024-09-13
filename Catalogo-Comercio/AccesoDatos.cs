@@ -51,6 +51,20 @@ namespace Catalogo_Comercio
                 throw ex;
             }
         }
+        public int ejecutarConsultaScalar()
+        {
+            comando.Connection= conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public void setConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;

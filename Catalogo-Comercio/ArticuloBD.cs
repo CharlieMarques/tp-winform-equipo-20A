@@ -55,20 +55,21 @@ namespace Catalogo_Comercio
                 datos.cerrarConexion();
             }
         }
-        public void agregar(Articulo nuevo) // public?
+        public int agregar(Articulo nuevo) // public?
         {
             AccesoDatos datos = new AccesoDatos();
+            int idArticulo;
 
             try
             {
-                datos.setConsulta("Insert Into ARTICULOS (Codigo, Nombre, Descripcion, idMarca, idCategoria, Precio) Values (@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria,@Precio)");
+                datos.setConsulta("Insert Into ARTICULOS (Codigo, Nombre, Descripcion, idMarca, idCategoria, Precio) Values (@Codigo,@Nombre,@Descripcion,@idMarca,@idCategoria,@Precio); SELECT SCOPE_IDENTITY();");
                 datos.setParametro("@Codigo", nuevo.Codigo);
                 datos.setParametro("@Nombre", nuevo.Nombre);
                 datos.setParametro("@Descripcion", nuevo.Descripcion);
                 datos.setParametro("@idMarca", nuevo.Marca.Id);
                 datos.setParametro("@idCategoria", nuevo.Categoria.Id);
                 datos.setParametro("@Precio", nuevo.Precio);
-                datos.ejecutarConsulta();
+               return idArticulo = datos.ejecutarConsultaScalar();
             }
             catch (Exception ex)
             {
