@@ -18,6 +18,7 @@ namespace Winform_Equipo_20A
         private ArticuloBD articuloBD = new ArticuloBD();
         Imagen imagen = new Imagen();
         Articulo seleccionado;
+        private volatile int imgIndex = 0;
 
         public frmArticulos()
         {
@@ -28,7 +29,7 @@ namespace Winform_Equipo_20A
             listaArticulo = articuloBD.listar();
             dgvArticulos.DataSource = listaArticulo;
             OcultarColumnas();
-            CargarImagen(listaArticulo[0].Imagen.UrlImagen);
+            CargarImagen(listaArticulo[0].Imagenes[imgIndex].UrlImagen);
         }
 
         private void CargarImagen(string url)
@@ -57,7 +58,7 @@ namespace Winform_Equipo_20A
         {
             dgvArticulos.Columns["Id"].Visible = false;
             // dgvArticulos.Columns["Codigo"].Visible = false;
-            dgvArticulos.Columns["Imagen"].Visible = false;
+            // dgvArticulos.Columns["Imagenes"].Visible = false;
             dgvArticulos.Columns["Descripcion"].Visible = false;
         }
 
@@ -71,8 +72,9 @@ namespace Winform_Equipo_20A
         {
             if (dgvArticulos.CurrentRow != null)
             {
+                imgIndex = 0;
                 seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(seleccionado.Imagen.UrlImagen);
+                CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
             }
         }
 
@@ -259,6 +261,26 @@ namespace Winform_Equipo_20A
                 MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al realizar la consulta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Console.WriteLine($"Error: {ex.ToString()}");
             }
+        }
+
+        private void btnPrevImg_Click(object sender, EventArgs e)
+        {
+            imgIndex--;
+            if (imgIndex < 0)
+            {
+                imgIndex = seleccionado.Imagenes.Count()-1;
+            }
+            CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
+        }
+
+        private void btnNextImg_Click(object sender, EventArgs e)
+        {
+            imgIndex++;
+            if (imgIndex > seleccionado.Imagenes.Count()-1)
+            {
+                imgIndex = 0;
+            }
+            CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
         }
     }
 }

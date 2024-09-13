@@ -45,6 +45,8 @@
             this.btnFiltroAvanzado = new System.Windows.Forms.Button();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.btnAgregarImagen = new System.Windows.Forms.Button();
+            this.btnNextImg = new System.Windows.Forms.Button();
+            this.btnPrevImg = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -210,11 +212,33 @@
             this.btnAgregarImagen.UseVisualStyleBackColor = true;
             this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
             // 
+            // btnNextImg
+            // 
+            this.btnNextImg.Location = new System.Drawing.Point(698, 395);
+            this.btnNextImg.Name = "btnNextImg";
+            this.btnNextImg.Size = new System.Drawing.Size(27, 23);
+            this.btnNextImg.TabIndex = 17;
+            this.btnNextImg.Text = ">";
+            this.btnNextImg.UseVisualStyleBackColor = true;
+            this.btnNextImg.Click += new System.EventHandler(this.btnNextImg_Click);
+            // 
+            // btnPrevImg
+            // 
+            this.btnPrevImg.Location = new System.Drawing.Point(662, 395);
+            this.btnPrevImg.Name = "btnPrevImg";
+            this.btnPrevImg.Size = new System.Drawing.Size(30, 23);
+            this.btnPrevImg.TabIndex = 17;
+            this.btnPrevImg.Text = "<";
+            this.btnPrevImg.UseVisualStyleBackColor = true;
+            this.btnPrevImg.Click += new System.EventHandler(this.btnPrevImg_Click);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPrevImg);
+            this.Controls.Add(this.btnNextImg);
             this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.btnLimpiarFiltro);
@@ -261,5 +285,7 @@
         private System.Windows.Forms.Button btnLimpiarFiltro;
         private System.Windows.Forms.PictureBox pbxArticulo;
         private System.Windows.Forms.Button btnAgregarImagen;
+        private System.Windows.Forms.Button btnNextImg;
+        private System.Windows.Forms.Button btnPrevImg;
     }
 }

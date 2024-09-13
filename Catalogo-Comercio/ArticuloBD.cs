@@ -39,7 +39,7 @@ namespace Catalogo_Comercio
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    aux.Imagen = imagenDB.GetImagen(aux.Id);
+                    aux.Imagenes = imagenDB.GetImagenes(aux.Id);
                     lista.Add(aux);
                 }
                 return lista;
@@ -195,7 +195,7 @@ namespace Catalogo_Comercio
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    aux.Imagen = imagenDB.GetImagen(aux.Id);
+                    aux.Imagenes = imagenDB.GetImagenes(aux.Id);
                     lista.Add(aux);
                 }
                 return lista;

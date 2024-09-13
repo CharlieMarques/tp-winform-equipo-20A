@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Catalogo_Comercio;
+using System.Net;
 
 namespace Winform_Equipo_20A
 {
@@ -49,19 +50,9 @@ namespace Winform_Equipo_20A
         {
             this.Close();
         }
-        private bool SoloNumeros(string cadena)
-        {
-            int cantComa = 0;
-            foreach (char character in cadena)
-            {
-                if (!(char.IsNumber(character) || character == ','))
-                    return false;
-                if(character == ',')
-                    cantComa++;
-                if(cantComa >1)
-                    return false;
-            }
-            return true;
+        private bool esDecimal(string cadena)
+        { 
+            return decimal.TryParse(cadena, out decimal res);
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -79,7 +70,7 @@ namespace Winform_Equipo_20A
                 {
                     MessageBox.Show($"Debe ingresar el precio", $"Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                else if (!SoloNumeros(tbPrecio.Text))
+                else if (!esDecimal(tbPrecio.Text))
                 {
                     MessageBox.Show($"El precio debe ser un número válido", $"Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

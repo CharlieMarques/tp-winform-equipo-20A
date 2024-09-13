@@ -42,14 +42,14 @@ namespace Catalogo_Comercio
             }
         }
 
-        public Imagen GetImagen(int IdArticulo)
+        public List<Imagen> GetImagenes(int IdArticulo)
         {
-            Imagen imagen = listaImagenes.FirstOrDefault(clase => clase.IdArticulo == IdArticulo);
+            List<Imagen> imagenes = listaImagenes.Where(clase => clase.IdArticulo == IdArticulo).ToList();
             
-            if (imagen == null)
-                imagen = new Imagen(-1, IdArticulo, "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
+            if (imagenes == null)
+                imagenes.Append(new Imagen(-1, IdArticulo, "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"));
             
-            return imagen;
+            return imagenes;
         }
         public void AgregarImagen(int IdArticulo, string UrlImagen)
         {
