@@ -294,5 +294,12 @@ namespace Winform_Equipo_20A
             }
             CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
         }
+
+        private void btnDetalle_Click(object sender, EventArgs e)
+        {
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmDetalle detalle = new frmDetalle(seleccionado);
+            detalle.ShowDialog();
+        }
     }
 }
