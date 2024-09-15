@@ -82,7 +82,11 @@ namespace Winform_Equipo_20A
             {
                 imgIndex = 0;
                 seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
+                if (seleccionado.Imagenes.Count > 0)
+                    CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
+                else
+                    CargarImagen("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
+
             }
         }
 
