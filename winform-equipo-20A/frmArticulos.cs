@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace Winform_Equipo_20A
         Imagen imagen = new Imagen();
         Articulo seleccionado;
         private volatile int imgIndex = 0;
+        string carpetaUtilidades = ConfigurationManager.AppSettings["Utilidades"];
+        string directorioBase = AppDomain.CurrentDomain.BaseDirectory;
+        string directorioCompleto;
+
 
         public frmArticulos()
         {
@@ -34,6 +39,7 @@ namespace Winform_Equipo_20A
 
         private void CargarImagen(string url)
         {
+            directorioCompleto = System.IO.Path.Combine(directorioBase, carpetaUtilidades);
             try
             {
                 pbxArticulo.Load(url);
@@ -41,7 +47,9 @@ namespace Winform_Equipo_20A
             }
             catch (Exception )
             {
-                pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
+                pbxArticulo.Load( directorioCompleto + "ImagenRotapng.png");
+               // (" ");
+                //pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
             }
         }
 
