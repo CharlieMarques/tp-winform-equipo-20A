@@ -59,7 +59,10 @@
             this.dgvArticulos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.ReadOnly = true;
+            this.dgvArticulos.RowHeadersVisible = false;
             this.dgvArticulos.RowHeadersWidth = 62;
+            this.dgvArticulos.RowTemplate.Height = 25;
+            this.dgvArticulos.RowTemplate.ReadOnly = true;
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(814, 391);
             this.dgvArticulos.TabIndex = 0;
@@ -72,7 +75,7 @@
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(168, 35);
             this.btnAgregar.TabIndex = 1;
-            this.btnAgregar.Text = "Agregar Articulo";
+            this.btnAgregar.Text = "Agregar Artículo";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -83,7 +86,7 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(168, 35);
             this.btnModificar.TabIndex = 2;
-            this.btnModificar.Text = "Modificar Articulo";
+            this.btnModificar.Text = "Modificar Artículo";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -94,7 +97,7 @@
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(168, 35);
             this.btnEliminar.TabIndex = 3;
-            this.btnEliminar.Text = "Eliminar Articulo";
+            this.btnEliminar.Text = "Eliminar Artículo";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
@@ -106,7 +109,7 @@
             this.lblFiltroCodigo.Name = "lblFiltroCodigo";
             this.lblFiltroCodigo.Size = new System.Drawing.Size(74, 20);
             this.lblFiltroCodigo.TabIndex = 4;
-            this.lblFiltroCodigo.Text = "CODIGO";
+            this.lblFiltroCodigo.Text = "CÓDIGO";
             // 
             // tbFiltroCodigo
             // 
@@ -294,7 +297,7 @@
             this.MinimumSize = new System.Drawing.Size(1222, 748);
             this.Name = "frmArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmArticulos";
+            this.Text = "Equipo20A";
             this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();

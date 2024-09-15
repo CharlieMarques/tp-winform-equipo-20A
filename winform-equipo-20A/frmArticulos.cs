@@ -33,6 +33,7 @@ namespace Winform_Equipo_20A
         {
             listaArticulo = articuloBD.listar();
             dgvArticulos.DataSource = listaArticulo;
+            EscalarColumnas();
             OcultarColumnas();
             CargarImagen(listaArticulo[0].Imagenes[imgIndex].UrlImagen);
         }
@@ -301,5 +302,17 @@ namespace Winform_Equipo_20A
             frmDetalle detalle = new frmDetalle(seleccionado);
             detalle.ShowDialog();
         }
+        private void EscalarColumnas()
+        {
+            dgvArticulos.Columns[0].Width = 108;
+            dgvArticulos.Columns[1].Width = 108;
+            dgvArticulos.Columns[2].Width = 108;
+            dgvArticulos.Columns[3].Width = 108;
+            dgvArticulos.Columns[4].Width = 108;
+            dgvArticulos.Columns[5].Width = 108;
+            dgvArticulos.Columns[6].Width = 108;
+        }
+
     }
+
 }

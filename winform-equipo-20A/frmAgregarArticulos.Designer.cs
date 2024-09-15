@@ -54,7 +54,7 @@
             this.lblCodArticulo.Name = "lblCodArticulo";
             this.lblCodArticulo.Size = new System.Drawing.Size(152, 20);
             this.lblCodArticulo.TabIndex = 0;
-            this.lblCodArticulo.Text = "*Codigo de Articulo :";
+            this.lblCodArticulo.Text = "*Código de Artículo :";
             // 
             // lblNombre
             // 
@@ -74,7 +74,7 @@
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(100, 20);
             this.lblDescripcion.TabIndex = 2;
-            this.lblDescripcion.Text = "Descripcion :";
+            this.lblDescripcion.Text = "Descripción :";
             // 
             // lblPrecio
             // 
@@ -104,7 +104,7 @@
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(86, 20);
             this.lblCategoria.TabIndex = 5;
-            this.lblCategoria.Text = "Categoria :";
+            this.lblCategoria.Text = "Categoría :";
             // 
             // tbCodArticulo
             // 
