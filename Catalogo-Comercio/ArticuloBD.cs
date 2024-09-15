@@ -207,5 +207,26 @@ namespace Catalogo_Comercio
                 throw ex;
             }
         }
+        public bool CheckCodigo(string Codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("Select COUNT(*) from Articulos where Codigo = @Codigo");
+                datos.setParametro("@Codigo", Codigo);
+                int codigo = (int)datos.ejecutarConsultaScalar();
+                return codigo > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Catalogo_Comercio
     public class ImagenDB
     {
         private readonly List<Imagen> listaImagenes;
-        public ImagenDB() 
+        public ImagenDB()
         {
             listaImagenes = new List<Imagen>();
             AccesoDatos datos = new AccesoDatos();
@@ -45,10 +45,10 @@ namespace Catalogo_Comercio
         public List<Imagen> GetImagenes(int IdArticulo)
         {
             List<Imagen> imagenes = listaImagenes.Where(clase => clase.IdArticulo == IdArticulo).ToList();
-            
+
             if (imagenes == null)
                 imagenes.Append(new Imagen(-1, IdArticulo, "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"));
-            
+
             return imagenes;
         }
         public void AgregarImagen(int IdArticulo, string UrlImagen)
@@ -57,7 +57,7 @@ namespace Catalogo_Comercio
             try
             {
                 datos.setConsulta("Insert into Imagenes (IdArticulo, ImagenUrl) values (@IdArticulo, @ImagenUrl)");
-                datos.setParametro("@IdArticulo",IdArticulo);
+                datos.setParametro("@IdArticulo", IdArticulo);
                 datos.setParametro("@ImagenUrl", UrlImagen);
                 datos.ejecutarConsulta();
             }
@@ -65,6 +65,21 @@ namespace Catalogo_Comercio
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+        public void eliminarImagen(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("Delete from Imagenes where idArticulo = @IdArticulo");
+                datos.setParametro("@IdArticulo", idArticulo);
+                datos.ejecutarConsulta();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

@@ -33,7 +33,7 @@ namespace Winform_Equipo_20A
         {
             listaArticulo = articuloBD.listar();
             dgvArticulos.DataSource = listaArticulo;
-            EscalarColumnas();
+            EscalarColumnas(dgvArticulos,104);
             OcultarColumnas();
             CargarImagen(listaArticulo[0].Imagenes[imgIndex].UrlImagen);
         }
@@ -49,8 +49,6 @@ namespace Winform_Equipo_20A
             catch (Exception )
             {
                 pbxArticulo.Load( directorioCompleto + "ImagenRotapng.png");
-               // (" ");
-                //pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png");
             }
         }
 
@@ -231,6 +229,7 @@ namespace Winform_Equipo_20A
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             ArticuloBD articuloEliminar = new ArticuloBD();
+            ImagenDB imagenEliminar = new ImagenDB();
             try
             {
             if(dgvArticulos.SelectedRows.Count !=0)
@@ -240,6 +239,7 @@ namespace Winform_Equipo_20A
                 {
                     seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                     articuloEliminar.Eliminar(seleccionado.Id);
+                    imagenEliminar.eliminarImagen(seleccionado.Id);
                     CargarDatos();
                 }
             }
@@ -302,15 +302,15 @@ namespace Winform_Equipo_20A
             frmDetalle detalle = new frmDetalle(seleccionado);
             detalle.ShowDialog();
         }
-        private void EscalarColumnas()
+        private void EscalarColumnas(DataGridView dataGridView, int anchoColumna)
         {
-            dgvArticulos.Columns[0].Width = 108;
-            dgvArticulos.Columns[1].Width = 108;
-            dgvArticulos.Columns[2].Width = 108;
-            dgvArticulos.Columns[3].Width = 108;
-            dgvArticulos.Columns[4].Width = 108;
-            dgvArticulos.Columns[5].Width = 108;
-            dgvArticulos.Columns[6].Width = 108;
+            if(dataGridView.Columns.Count >0)
+            {
+                for(int x =0; x<dataGridView.Columns.Count;x++)
+                {
+                    dataGridView.Columns[x].Width = anchoColumna;
+                }
+            }
         }
 
     }

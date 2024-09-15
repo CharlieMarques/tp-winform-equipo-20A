@@ -36,7 +36,7 @@ namespace Winform_Equipo_20A
             this.articulo = articulo;
             this.imagen = imagen;
             AgregarOtraImagen = AgregarImagen;
-            
+
             Text = "Agregar Foto";
             tbCodArticulo.ReadOnly = true;
             tbNombre.ReadOnly = true;
@@ -51,7 +51,7 @@ namespace Winform_Equipo_20A
             this.Close();
         }
         private bool esDecimal(string cadena)
-        { 
+        {
             return decimal.TryParse(cadena, out decimal res);
         }
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -88,30 +88,32 @@ namespace Winform_Equipo_20A
                     }
                     else
                     {
-                        if(!AgregarOtraImagen)
+                        if (!AgregarOtraImagen)
                         {
                             if (articulo.Id != 0)
                             {
                                 articuloBD.modificar(articulo);
                                 MessageBox.Show($"Se modificó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Close();
                             }
-                            else 
+                            else if (!articuloBD.CheckCodigo(articulo.Codigo))
                             {
                                 if (!(string.IsNullOrEmpty(tbImagen.Text)))
                                     imagenDB.AgregarImagen(articuloBD.agregar(articulo), tbImagen.Text);
                                 else
                                     articuloBD.agregar(articulo);
-
                                 MessageBox.Show($"Se agregó exitosamente", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Close();
                             }
+                            else
+                                MessageBox.Show("El Codigo de Articulo ya existe");
                         }
                         else
                         {
                             imagenDB.AgregarImagen(articulo.Id, tbImagen.Text);
                             MessageBox.Show($"Se agregó exitosamente La imagen", $"Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Close();
                         }
-
-                        Close();
                     }
                 }
 
