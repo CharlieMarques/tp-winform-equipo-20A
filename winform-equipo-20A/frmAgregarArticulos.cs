@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Catalogo_Comercio;
 using System.Net;
+using System.Configuration;
 
 namespace Winform_Equipo_20A
 {
@@ -18,6 +19,9 @@ namespace Winform_Equipo_20A
         private Articulo articulo = null;
         private Imagen imagen = null;
         private bool AgregarOtraImagen = false;
+        string carpetaUtilidades = ConfigurationManager.AppSettings["Utilidades"];
+        string directorioBase = AppDomain.CurrentDomain.BaseDirectory;
+        string directorioCompleto;
         public frmAgregarArticulos()
         {
             InitializeComponent();
@@ -153,6 +157,24 @@ namespace Winform_Equipo_20A
                 MessageBox.Show($"Mensaje de error: {ex.Message}", $"Error al cargar las marcas y categorias", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Error: {ex.ToString()}");
             }
+        }
+        private void CargarImagen(string url)
+        {
+            directorioCompleto = System.IO.Path.Combine(directorioBase, carpetaUtilidades);
+            try
+            {
+                pictureBox1.Load(url);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            catch (Exception)
+            {
+                pictureBox1.Load(directorioCompleto + "ImagenRotapng.png");
+            }
+        }
+
+        private void tbImagen_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(tbImagen.Text);
         }
     }
 }

@@ -278,22 +278,30 @@ namespace Winform_Equipo_20A
 
         private void btnPrevImg_Click(object sender, EventArgs e)
         {
+            if(seleccionado.Imagenes.Count > 0)
+            {
+
             imgIndex--;
             if (imgIndex < 0)
             {
                 imgIndex = seleccionado.Imagenes.Count()-1;
             }
             CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
+            }
         }
 
         private void btnNextImg_Click(object sender, EventArgs e)
         {
+            if(seleccionado.Imagenes.Count > 0)
+            {
+
             imgIndex++;
             if (imgIndex > seleccionado.Imagenes.Count()-1)
             {
                 imgIndex = 0;
             }
             CargarImagen(seleccionado.Imagenes[imgIndex].UrlImagen);
+            }
         }
 
         private void btnDetalle_Click(object sender, EventArgs e)
