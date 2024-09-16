@@ -32,6 +32,8 @@ namespace Winform_Equipo_20A
             InitializeComponent();
             this.articulo = articulo;
             Text = "Modificar Articulo";
+            tbImagen.Visible = false;
+            lblImagen.Text = "";
             AgregarOtraImagen = false;
         }
         public frmAgregarArticulos(Articulo articulo, Imagen imagen, bool AgregarImagen)
